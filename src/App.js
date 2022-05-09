@@ -15,8 +15,8 @@ import Urlhithome from './components/Urlhithome';
 export default class App extends Component {
   constructor(props){
     super(props);
-    // global.url='http://ec2-44-201-171-84.compute-1.amazonaws.com:4005'
-    global.url='http://localhost:4005'
+    global.url='http://ec2-44-201-171-84.compute-1.amazonaws.com:4005'
+    // global.url='http://localhost:4005'
   }
   render() {
     return (

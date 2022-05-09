@@ -129,6 +129,56 @@ getRestaurants(){
   })
 }
 
+approvePayment=(id)=>{
+  var body={
+    "user_id":id
+  }
+  axios.post(global.url+'/approvePayment', body ,{headers:{
+    "Authorization": this.state.token,
+    "Content-Type":"application/json"
+  }})
+  .then(res => {
+      console.log(res.data);
+      if(res.data.statusCode===200){
+        this.setState({alertshow:false,alertshowsuccess:true,alerttext:res.data.message});
+        this.getRestaurants()
+        this.hideAlert()
+      }
+      else{
+        this.setState({alertshow:true,alertshowsuccess:false,alerttext:res.data.message});
+        this.hideAlert()
+      }
+  }).catch(error=>{
+    this.setState({alertshow:true,alertshowsuccess:false,alerttext:'Network Error'});
+    this.hideAlert()
+  })
+}
+
+approveRestaurant=(id)=>{
+  var body={
+    "user_id":id
+  }
+  axios.post(global.url+'/approveRestaurant', body ,{headers:{
+    "Authorization": this.state.token,
+    "Content-Type":"application/json"
+  }})
+  .then(res => {
+      console.log(res.data);
+      if(res.data.statusCode===200){
+        this.setState({alertshow:false,alertshowsuccess:true,alerttext:res.data.message});
+        this.getRestaurants()
+        this.hideAlert()
+      }
+      else{
+        this.setState({alertshow:true,alertshowsuccess:false,alerttext:res.data.message});
+        this.hideAlert()
+      }
+  }).catch(error=>{
+    this.setState({alertshow:true,alertshowsuccess:false,alerttext:'Network Error'});
+    this.hideAlert()
+  })
+}
+
 deleteUser=(id)=>{
   var body={
     "user_id":id
@@ -273,7 +323,8 @@ handleClick(index, props) {
                           <th className=" text-truncate col-2" style={{fontWeight:'500'}}>Owner</th>
                           <th className=" text-truncate col-2" style={{fontWeight:'500'}}>Address</th>
                           <th className=" text-truncate col-2" style={{fontWeight:'500'}}>Phone number</th>
-                          <th className="text-truncate col-3" style={{fontWeight: '500',textAlign: 'center'}}>Actions</th>
+                          <th className="text-truncate col-2" style={{fontWeight: '500',textAlign: 'center'}}>Status</th>
+                          <th className="text-truncate col-2" style={{fontWeight: '500',textAlign: 'center'}}>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -283,11 +334,16 @@ handleClick(index, props) {
                           <td className="text-truncate col-2">{item.owner}</td>
                           <td className="text-truncate col-2">{item.address}</td>
                           <td className="text-truncate col-2">{item.mobileno}</td>
-                          <td className="pt-2 text-truncate col-3">
+                          {(item.verified && item.payment_completed) ? <td className="text-truncate col-2">Approved</td> :
+                          (!item.verified) ? <td className="text-truncate col-2">Pending Approval</td> : 
+                          <td className="text-truncate col-2">Payment Pending</td> }
+                          <td className="pt-2 text-truncate col-2">
                                 <span>
                                 <i data-toggle="modal" data-target="#editModal" title="Edit" onClick={()=>{this.setState({userIdEditable:item.user_id, nameEditable:item.name, addressEditable:item.address, ownerEditable:item.owner, emailEditable: item.email, passwordEditable: item.password, mobilenoEditable: item.mobileno})}}  className="fas fa-pen  wave-icon border-color"></i>
                                 <i data-toggle="modal" data-target="#menuModal" title="View Menu" onClick={()=>{this.getRestaurantMenu(item.id)}}  className="fas fa-eye wave-icon border-color"></i>
                                 <i  className="far fa-trash-alt  wave-icon border-color" title="Delete" onClick={()=>{this.deleteUser(item.user_id)}}></i>
+                                {!item.verified && !item.payment_completed ? <i  className="fa fa-check  wave-icon border-color" title="Approve" onClick={()=>{this.approveRestaurant(item.user_id)}}></i> : null}
+                                {item.verified && !item.payment_completed ? <i  className="fa fa-credit-card  wave-icon border-color" title="Approve Payment" onClick={()=>{this.approvePayment(item.user_id)}}></i> : null}
                                 </span>
                             </td>
                         </tr>

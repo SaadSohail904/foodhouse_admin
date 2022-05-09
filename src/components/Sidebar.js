@@ -28,7 +28,6 @@ export default class Sidebar extends Component {
             <ul className={this.props.classnamesidebar} id="accordionSidebar">
               <div className="sidebar-brand d-flex align-items-center justify-content-center">
                 <div className="sidebar-brand-icon">
-                  <img style={{width: "50%"}} alt="logo" src="/img/logo.jpeg" />
                 </div>
               </div>
               <hr className="sidebar-divider my-0" />
