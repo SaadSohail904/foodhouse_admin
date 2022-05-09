@@ -23,7 +23,6 @@ export default class Users extends Component {
       // user variable
       fnameEditable:'',
       lnameEditable:'',
-      emailEditable:'',
       passwordEditable: '',
       mobilenoEditable: '',
       fname:'',
@@ -69,7 +68,6 @@ edituser=()=>{
     "user_id":this.state.userIdEditable,
     "fname": this.state.fnameEditable,
     "lname": this.state.lnameEditable,
-    "email": this.state.emailEditable,
     "mobileno": this.state.mobilenoEditable,
     "password": this.state.passwordEditable
   }
@@ -288,7 +286,7 @@ handleClick(index, props) {
                           <td className="text-truncate col-3">{item.mobileno}</td>
                           <td className="pt-2 text-truncate col-3">
                                 <span>
-                                <i data-toggle="modal" data-target="#editModal" title="Edit" onClick={()=>{this.setState({userIdEditable:item.user_id, fnameEditable:item.fname, lnameEditable: item.lname, emailEditable: item.email, passwordEditable: item.password, mobilenoEditable: item.mobileno})}}  className="fas fa-pen  wave-icon border-color"></i>
+                                <i data-toggle="modal" data-target="#editModal" title="Edit" onClick={()=>{this.setState({userIdEditable:item.user_id ||'', fnameEditable:item.fname ||'', lnameEditable: item.lname ||'', passwordEditable: item.password ||'', mobilenoEditable: item.mobileno ||''})}}  className="fas fa-pen  wave-icon border-color"></i>
                                 <i data-toggle="modal" data-target="#menuModal" title="View Orders" onClick={()=>{this.getUserOrders(item.user_id)}}  className="fas fa-eye wave-icon border-color"></i>
                                 <i  className="far fa-trash-alt  wave-icon border-color" title="Delete" onClick={()=>{this.deleteUser(item.user_id)}}></i>
                                 </span>
@@ -349,10 +347,9 @@ handleClick(index, props) {
                           </div>
                         </div>
                         <div className="row">
-                          
-                        <div className="form-group col-md-6"> 
-                            <label className="edit-modal-user">Email</label>   
-                            <input type="text" onChange={e => {this.setState({emailEditable:e.target.value})}} className="form-control field-text p-0" name="name" value={this.state.emailEditable}
+                        <div className="form-group col-md-6">   
+                            <label className="edit-modal-user">Mobile no</label> 
+                            <input type="text" onChange={e => {this.setState({mobilenoEditable:e.target.value})}} className="form-control field-text p-0" name="name" value={this.state.mobilenoEditable}
                               required="required"/>
                           </div>
                           <div className="form-group col-md-6">   
@@ -362,14 +359,6 @@ handleClick(index, props) {
                           </div>
                           
                         </div>
-                        <div className="row">
-                          <div className="form-group col-md-6">   
-                            <label className="edit-modal-user">Mobile no</label> 
-                            <input type="tel" onChange={e => {this.setState({mobilenoEditable:e.target.value})}} className="form-control field-text p-0" name="name" value={this.state.mobilenoEditable}
-                              required="required"/>
-                          </div>
-                        </div>
-                        
                           </div>
                           <div className="modal-footer" style={{textAlign:'center',display:'block'}}>
                             <div >
@@ -469,7 +458,7 @@ handleClick(index, props) {
                       </div>
                       <div className="form-group"  style={{width:'100%',float:'left'}}>
                         <div className="input-group">
-                          <input type="phone" className="form-control field-text" name="name" placeholder="Mobile No"
+                          <input type="text" className="form-control field-text" name="name" placeholder="Mobile No"
                             required="required" value={this.state.mobileno} onChange={e => {this.setState({mobileno:e.target.value})}}/>
                         </div>
                       </div>
