@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar';
 import Navi from './Navi';
+import StarRatings from 'react-star-ratings';
 // import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 import Footer from './Footer';
@@ -309,7 +310,13 @@ handleClick(index, props) {
                   <div className="col-md-12 table-img" style={{textTransform:'capitalize'}}>
                     <img alt="profile" className="img-profile rounded-circle mr-2 ml-3" src= {item?.image}
                       style={{objectFit:'cover',float:'left'}} />
-                   <div className="text-truncate col-md-5 pt-2 pl-0" style={{float:'left',cursor:'pointer'}} title={item.name}>{item.name}</div>
+                   <div className="text-truncate col-md-1 pt-2 pl-0" style={{float:'left',cursor:'pointer'}} title={item.name}>{item.name}</div>
+                   {item.rating? <div style={{float: 'left', marginRight: 15, marginTop: 4}}><StarRatings
+                      rating={item?.rating}
+                      starDimension="25px"
+                      starSpacing="5px"
+                      starRatedColor="#FF9529"
+                    /> </div>:null}
                   </div>
         
                   <div className="table table-scroll">
@@ -443,8 +450,9 @@ handleClick(index, props) {
                     <img alt="profile" className="img-profile rounded-circle mr-2 ml-3" src= {item?.image}
                       style={{objectFit:'cover',float:'left'}} />
                    <div className="text-truncate col-md-5 pt-2 pl-0" style={{float:'left',cursor:'pointer'}} title={item.name}>{item.name}</div>
+                   {(item.bestSeller=true) &&  (<div style={{float:'right', marginRight: '10px'}}><i className="fa fa-star"></i></div>)}
+
                   </div>
-        
                   <div className="table table-scroll">
                     <table className="table table-bordered mb-4" style={{backgroundColor:'#f8f8f8'}}>
                       <thead>
