@@ -338,7 +338,7 @@ handleClick(index, props) {
                           <td className="pt-2 text-truncate col-2">
                                 <span>
                                 <i data-toggle="modal" data-target="#editModal" title="Edit" onClick={()=>{this.setState({userIdEditable:item.user_id, nameEditable:item.name||'', addressEditable:item.address||'', ownerEditable:item.owner||'', passwordEditable: item.password||'', mobilenoEditable: item.mobileno||''})}}  className="fas fa-pen  wave-icon border-color"></i>
-                                <i data-toggle="modal" data-target="#menuModal" title="View Menu" onClick={()=>{this.getRestaurantMenu(item.id)}}  className="fas fa-eye wave-icon border-color"></i>
+                                <i data-toggle="modal" data-target="#menuModal" title="View Menu" onClick={()=>{this.getRestaurantMenu(item.restaurant_id)}}  className="fas fa-eye wave-icon border-color"></i>
                                 <i  className="far fa-trash-alt  wave-icon border-color" title="Delete" onClick={()=>{this.deleteUser(item.user_id)}}></i>
                                 {!item.verified && !item.payment_completed ? <i  className="fa fa-check  wave-icon border-color" title="Approve" onClick={()=>{this.approveRestaurant(item.user_id)}}></i> : null}
                                 {item.verified && !item.payment_completed ? <i  className="fa fa-credit-card  wave-icon border-color" title="Approve Payment" onClick={()=>{this.approvePayment(item.user_id)}}></i> : null}
@@ -371,7 +371,7 @@ handleClick(index, props) {
         
             <div className="modal fade" id="editModal" role="dialog">
                           <div className="modal-dialog modal_login">
-                          <form onSubmit={e => { e.preventDefault(); }}>
+                          <form onSubmit={e => { e.preventDefault(); }} autoComplete="off">
                         <div className="modal-content">
                           <div className="modal-header modal-border">
                             <h4 className="modal-title modal-heading edit-Heading">Edit Restaurant</h4>
@@ -387,7 +387,7 @@ handleClick(index, props) {
                           </div>
                           <div className="form-group col-md-6"> 
                             <label className="edit-modal-restaurant">Address</label>     
-                            <input type="address" onChange={e => {this.setState({addressEditable:e.target.value})}} className="form-control field-text p-0" name="name" value={this.state.addressEditable}
+                            <input type="text" onChange={e => {this.setState({addressEditable:e.target.value})}} className="form-control field-text p-0" name="name" value={this.state.addressEditable}
                               required="required"/>
                           </div>
                         </div>
@@ -399,7 +399,7 @@ handleClick(index, props) {
                           </div>
                           <div className="form-group col-md-6">   
                             <label className="edit-modal-restaurant">Contact no</label> 
-                            <input type="tel" onChange={e => {this.setState({mobilenoEditable:e.target.value})}} className="form-control field-text p-0" name="name" value={this.state.mobilenoEditable}
+                            <input type="text" onChange={e => {this.setState({mobilenoEditable:e.target.value})}} className="form-control field-text p-0" name="name" value={this.state.mobilenoEditable}
                               required="required"/>
                           </div>
                         </div>
@@ -428,7 +428,7 @@ handleClick(index, props) {
           {/* <!-- Modal HTML--> */}
           <div className="modal fade" id="menuModal" role="dialog">
                           <div className="modal-dialog modal_login menu-modal">
-                          <form onSubmit={e => { e.preventDefault(); }}>
+                          <form onSubmit={e => { e.preventDefault(); }} autoComplete="off">
                         <div className="modal-content">
                           <div className="modal-header modal-border">
                             <h4 className="modal-title modal-heading edit-Heading">Restaurant Menu</h4>
@@ -492,7 +492,7 @@ handleClick(index, props) {
                       </div>
                       <div className="form-group" style={{width:'48%',float:'left'}}>
                         <div className="input-group">
-                          <input type="address" className="form-control field-text" name="name" placeholder="Address *"
+                          <input type="text" className="form-control field-text" name="name" placeholder="Address *"
                             required="required" value={this.state.address} onChange={e => {this.setState({address:e.target.value})}}/>
                         </div>
                       </div>
@@ -516,7 +516,7 @@ handleClick(index, props) {
                       </div>
                       <div className="form-group"  style={{width:'100%',float:'left'}}>
                         <div className="input-group">
-                          <input type="tel" className="form-control field-text" name="name" placeholder="Contact No"
+                          <input type="text" className="form-control field-text" name="name" placeholder="Contact No"
                             required="required" value={this.state.mobileno} onChange={e => {this.setState({mobileno:e.target.value})}}/>
                         </div>
                       </div>

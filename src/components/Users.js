@@ -326,7 +326,7 @@ handleClick(index, props) {
           {/* <!-- Modal HTML--> */}
             <div className="modal fade" id="editModal" role="dialog">
                           <div className="modal-dialog modal_login">
-                          <form onSubmit={e => { e.preventDefault(); }}>
+                          <form onSubmit={e => { e.preventDefault(); }} autoComplete="off">
                         <div className="modal-content">
                           <div className="modal-header modal-border">
                             <h4 className="modal-title modal-heading edit-Heading">Edit User</h4>
@@ -374,7 +374,7 @@ handleClick(index, props) {
           {/* <!-- Modal HTML--> */}
           <div className="modal fade" id="menuModal" role="dialog">
                           <div className="modal-dialog modal_login menu-modal">
-                          <form onSubmit={e => { e.preventDefault(); }}>
+                          <form onSubmit={e => { e.preventDefault(); }} autoComplete="off">
                         <div className="modal-content">
                           <div className="modal-header modal-border">
                             <h4 className="modal-title modal-heading edit-Heading">Orders</h4>

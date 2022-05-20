@@ -61,14 +61,14 @@ export default class Login extends Component {
                             <div className="form-group">
                                 <div className="input-group logininput">
                                     <span className="input-group-addon"><i className="fa fa-user pt-1"></i></span>
-                                    <input style={{backgroundColor:'#f6f7fa'}} type="email" className="form-control"
+                                    <input autoComplete="off" style={{backgroundColor:'#f6f7fa'}} type="email" className="form-control"
                                         name="username" placeholder="Username" required="required" onChange={e => {this.setState({email:e.target.value})}} />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="input-group logininput">
                                     <span className="input-group-addon"><i className="fa fa-lock pt-1"></i></span>
-                                    <input style={{backgroundColor:'#f6f7fa'}} type="password" className="form-control"
+                                    <input autoComplete="off" style={{backgroundColor:'#f6f7fa'}} type="password" className="form-control"
                                         name="password" placeholder="Password" required="required" 
                                         onChange={e => {this.setState({password:e.target.value})}}/>
                                 </div>
